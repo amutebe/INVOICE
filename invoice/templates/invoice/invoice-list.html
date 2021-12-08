@@ -11,7 +11,7 @@
     <div class="card">
         <header class="card-header">
             <p class="card-header-title">
-                All Orders / Change Order Status &nbsp;<button class="button is-rounded is-info">
+              <button class="button is-rounded is-info">
                     <a href="{% url 'invoice:invoice-create' %}" class="has-text-white">Create Invoice</a></button>
             </p>
         </header>
@@ -27,9 +27,10 @@
                                 <th>CUSTOMER</th>
                                 <th>DATE</th>
                                 <th>DUE DATE</th>
-                                <th>BALANCE</th>
+                              
                                 <th>TOTAL</th>
-                                <th>STATUS</th>
+                                <th>APPROVAL</th>
+                                <th>ORDER STATUS</th>
                                 <th>View</th>
                                 <th>DOWNLOAD</th>
 
@@ -39,13 +40,14 @@
                         <tr>
                             <td><input class="checkbox" type="checkbox" value="{{invoice.id}}" name="invoice_id" size="1" />
                             </td>
-                            <td width="1%">#{{invoice.id}}</td>
+                            <td width="1%">{{invoice.invoice_no}}</td>
                             <td width="9%">{{invoice.customer}}</td>
                             <td> {{invoice.date}}</td>
                             <td> {{invoice.due_date}} </td>
-                            <td width="1%"></td>
+                           
                             <td>{{invoice.total_amount}}</td>
-                            <td class="level-right">
+                            <td>{{invoice.invoice_status}}</td>
+                            <td class="level-center">
                                 {% if invoice.get_status %}
                                 <a class="button is-small is-success" href="#">Paid</a>
                                 {% else %}
@@ -65,22 +67,48 @@
             </div>
         </div>
     </div><br /><br /><br />
+
     <div class="card has-background-white-ter">
         <header class="card-header">
-            <p class="card-header-title">
-                Change Order Status
-            </p>
+            
+              <h1 class="name">  Status </h1>
+         
         </header>
         <div class="card-content">
+            <p class="card-header-title">
+                Approval Status
+            </p>
+            <div class="select is-rounded">
+                <select id="invoice_status" name="invoice_status">
+                    <option value="0">Pending</option>
+                    <option value="1">Okay</option>
+                    
+                    <option value="2">Cancelled</option>
+                </select>
+            </div>
+            <input class="button  is-info is-rounded" type="submit" class="btn" value="Change" name="mybtn">
+        </div>
+    </div>
+    <header class="card-header">
+
+    </header>
+    <div class="card has-background-white-ter">
+        <header class="card-header">
+
+        </header>
+        <div class="card-content">
+            <p class="card-header-title">
+                Order Status
+            </p>
             <div class="select is-rounded">
                 <select id="status" name="status">
                     <option value="1">Paid</option>
                     <option value="0">Not Paid</option>
                 </select>
             </div>
-            <input class="button  is-info is-rounded" type="submit" class="btn" value="Change Status" name="mybtn">
+            <input class="button  is-info is-rounded" type="submit" class="btn" value="Change" name="mybtn">
         </div>
-    </div>
+    </div>  
 </form>
 
 {% endblock content %}
